@@ -1,19 +1,14 @@
-import { ReactElement } from "react"
 import "./App.css"
-
-function Header():ReactElement{
-  return(
-    <header>
-      <h1>Header</h1>
-    </header>
-  )
-}
+import Header from "./components/Header"
+import Main from './components/Main';
+import Footer from "./components/Footer"
 
 function App() {
   return (
     <>
       <Header />
-      <h1>리액트 맛있겠다!</h1>
+      <Main />
+      <Footer />
     </>
   )
 }
