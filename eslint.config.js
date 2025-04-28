@@ -24,7 +24,9 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       "no-unused-vars": "off",
-      "react/prop-types": "off"
+      "react/prop-types": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/react/prop-types": "off"
     },
   },
 )
