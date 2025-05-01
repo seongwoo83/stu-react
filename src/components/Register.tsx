@@ -1,4 +1,4 @@
-import React, { EventHandler, ReactElement, useState } from "react"
+import React, {ReactElement, useState } from "react"
 
 // 간단한 회원가입
 /**
@@ -8,6 +8,9 @@ import React, { EventHandler, ReactElement, useState } from "react"
     4. 자기소개
 */
 
+type FormEvent = React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
+type FormEventHandler = (e: FormEvent) => void;
+
 const Register:()=>ReactElement = ()=>{
 
     const [name, setName] = useState<string>('이름');
@@ -15,19 +18,19 @@ const Register:()=>ReactElement = ()=>{
     const [country, setCountry] = useState<string>('')
     const [bio, setBio] = useState<string>('')
 
-    const onChangeName:(e:React.ChangeEvent<HTMLInputElement>)=>void = (e)=>{
+    const onChangeName:FormEventHandler = (e)=>{
         setName(e.target.value);
     }
 
-    const onChangeBirth: (e:React.ChangeEvent<HTMLInputElement>)=>void = (e)=>{
+    const onChangeBirth: FormEventHandler = (e)=>{
         setBirth(e.target.value);
     }
 
-    const onChangeCountry: (e:React.ChangeEvent<HTMLSelectElement>)=>void = (e)=>{
+    const onChangeCountry: FormEventHandler = (e)=>{
         setCountry(e.target.value);
     }
 
-    const onChangeBio: (e:React.ChangeEvent<HTMLTextAreaElement>)=>void = (e)=>{
+    const onChangeBio: FormEventHandler = (e)=>{
         setBio(e.target.value);
     }
 
