@@ -8,42 +8,45 @@ import React, {ReactElement, useState } from "react"
     4. 자기소개
 */
 
-type FormEvent = React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
-type FormEventHandler = (e: FormEvent) => void;
+type FormEvent = React.ChangeEvent<
+    HTMLInputElement |
+    HTMLSelectElement |
+    HTMLTextAreaElement
+>;
+
+interface InputState {
+    name: string;
+    birth: string;
+    country: string;
+    bio: string;
+}
 
 const Register:()=>ReactElement = ()=>{
 
-    const [name, setName] = useState<string>('이름');
-    const [birth, setBirth] = useState<string>("");
-    const [country, setCountry] = useState<string>('')
-    const [bio, setBio] = useState<string>('')
+    const [input, setInput] = useState<InputState>({
+        name: '',
+        birth: '',
+        country: '',
+        bio: '',
+    });
 
-    const onChangeName:FormEventHandler = (e)=>{
-        setName(e.target.value);
-    }
-
-    const onChangeBirth: FormEventHandler = (e)=>{
-        setBirth(e.target.value);
-    }
-
-    const onChangeCountry: FormEventHandler = (e)=>{
-        setCountry(e.target.value);
-    }
-
-    const onChangeBio: FormEventHandler = (e)=>{
-        setBio(e.target.value);
+    const onChange = (e:FormEvent)=>{
+        setInput({
+            ...input,
+            [e.target.name]: e.target.value
+        })
     }
 
     return (
         <div>
             <div>
-                <input type="text" onChange={onChangeName} placeholder={'이름을 입력해주세요'} value={name} />
+                <input type="text" name="name" onChange={onChange} placeholder={'이름을 입력해주세요'} value={input.name} />
             </div>
             <div>
-                <input type="date" onChange={onChangeBirth} value={birth}/>
+                <input type="date" name="birth" onChange={onChange} value={input.birth}/>
             </div>
             <div>
-                <select onChange={onChangeCountry} value={country}>
+                <select name="country" onChange={onChange} value={input.country}>
                     <option value="">선택</option>
                     <option value="ko">한국</option>
                     <option value="us">미국</option>
@@ -51,7 +54,7 @@ const Register:()=>ReactElement = ()=>{
                 </select>
             </div>
             <div>
-                <textarea cols={30} rows={10} onChange={onChangeBio} value={bio} />
+                <textarea cols={30} rows={10} name="bio" onChange={onChange} value={input.bio} />
             </div>
         </div>
     )
