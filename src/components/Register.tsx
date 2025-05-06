@@ -1,4 +1,4 @@
-import React, {ReactElement, useState } from "react"
+import React, {ReactElement, useState, useRef } from "react"
 
 // 간단한 회원가입
 /**
@@ -31,16 +31,25 @@ const Register:()=>ReactElement = ()=>{
     });
 
     const onChange = (e:FormEvent)=>{
+        countRef.current++;
         setInput({
             ...input,
             [e.target.name]: e.target.value
         })
     }
+    const countRef = useRef<number>(0);
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const onSubmit = ()=>{
+        if(input.name === ''){
+            inputRef.current?.focus();
+        }
+    }
 
     return (
         <div>
             <div>
-                <input type="text" name="name" onChange={onChange} placeholder={'이름을 입력해주세요'} value={input.name} />
+                <input ref={inputRef} type="text" name="name" onChange={onChange} placeholder={'이름을 입력해주세요'} value={input.name} />
             </div>
             <div>
                 <input type="date" name="birth" onChange={onChange} value={input.birth}/>
@@ -56,6 +65,8 @@ const Register:()=>ReactElement = ()=>{
             <div>
                 <textarea cols={30} rows={10} name="bio" onChange={onChange} value={input.bio} />
             </div>
+
+            <button onClick={onSubmit}>제출</button>
         </div>
     )
 }
